@@ -65,42 +65,31 @@ pause() {
 
 show_banner() {
     clear
+    local border="\033[38;5;51m"   # رنگ فیروزه‌ای نئونی برای کادر
+    local title="\033[38;5;220m"    # رنگ زرد طلایی برای عنوان
+    local version="\033[38;5;46m"   # رنگ سبز برای نسخه
+    local link1="\033[38;5;33m"     # رنگ آبی برای لینک اول
+    local link2="\033[38;5;201m"    # رنگ بنفش برای لینک دوم
+    local link3="\033[38;5;208m"    # رنگ نارنجی برای گیت‌هاب
     
-    # پالت رنگی برای موج متحرک روی بنر
-    local gradient_colors=("\033[38;5;46m" "\033[38;5;51m" "\033[38;5;33m" "\033[38;5;201m" "\033[38;5;226m" "\033[38;5;208m")
-    
-    # متن‌ها و ساختار فریم مدرن با گوشه‌های خاص
-    local border_color="\033[38;5;39m"
-    local text_dim="\033[38;5;245m"
-    local text_bold="\033[1m"
-    
-    # اجرای موج رنگی پویا (تعداد چرخه برای روانی حرکت)
-    for step in {1..8}; do
-        clear
-        # انتخاب رنگ پیش‌فرض برای این فریم از انیمیشن
-        local c="${gradient_colors[$((step % ${#gradient_colors[@]}))]}"
-        local c2="${gradient_colors[$(((step + 2) % ${#gradient_colors[@]}))]}"
-        
-        echo -e "${border_color}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓${NC}"
-        echo -e "${border_color}┃${NC}                                                              ${border_color}┃${NC}"
-        echo -e "${border_color}┃${NC}    ${c}███████╗██████╗ ███████╗███████╗██████╗                  ${border_color}┃${NC}"
-        echo -e "${border_color}┃${NC}    ${c}██╔════╝██╔══██╗██╔════╝██╔════╝██╔══██╗                 ${border_color}┃${NC}"
-        echo -e "${border_color}┃${NC}    ${c}███████╗██████╔╝█████╗  █████╗  ██║  ██║                 ${border_color}┃${NC}"
-        echo -e "${border_color}┃${NC}    ${c}╚════██║██╔═══╝ ██╔══╝  ██╔══╝  ██║  ██║                 ${border_color}┃${NC}"
-        echo -e "${border_color}┃${NC}    ${c}███████║██║     ███████╗███████╗██████╔╝                 ${border_color}┃${NC}"
-        echo -e "${border_color}┃${NC}    ${c}╚══════╝╚═╝     ╚══════╝╚══════╝╚═════╝                  ${border_color}┃${NC}"
-        echo -e "${border_color}┃${NC}                                                              ${border_color}┃${NC}"
-        echo -e "${border_color}┃${NC}    ${text_bold}\033[38;5;251mSpeed Tunneling ${text_dim}-${c2} Anti-DPI Manager            ${border_color}┃${NC}"
-        echo -e "${border_color}┃${NC}    \033[38;5;220mNew Version : ${SCRIPT_VERSION}                             ${border_color}┃${NC}"
-        echo -e "${border_color}┃${NC}                                                              ${border_color}┃${NC}"
-        echo -e "${border_color}┃${NC}    \033[38;5;45m⚡ Telegram : \033[4mhttps://t.me/SpeedwIT\033[0m                  ${border_color}┃${NC}"
-        echo -e "${border_color}┃${NC}    \033[38;5;45m⚡ Support  : \033[4mhttps://t.me/Speedw_IT\033[0m                 ${border_color}┃${NC}"
-        echo -e "${border_color}┃${NC}    \033[38;5;213m⚡ GitHub   : \033[4mhttps://github.com/SpeedwiT\033[0m              ${border_color}┃${NC}"
-        echo -e "${border_color}┃${NC}                                                              ${border_color}┃${NC}"
-        echo -e "${border_color}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛${NC}"
-        echo -e "${NC}"
-        sleep 0.12
-    done
+    echo -e "${border}╭──────────────────────────────────────────────────────────────╮${NC}"
+    echo -e "${border}│${NC}                                                              ${border}│${NC}"
+    echo -e "${border}│${NC}    \033[38;5;196m███████╗\033[38;5;208m██████╗ \033[38;5;226m███████╗\033[38;5;46m███████╗\033[38;5;51m██████╗\033[0m                  ${border}│${NC}"
+    echo -e "${border}│${NC}    \033[38;5;196m██╔════╝\033[38;5;208m██╔══██╗\033[38;5;226m██╔════╝\033[38;5;46m██╔════╝\033[38;5;51m██╔══██╗\033[0m                 ${border}│${NC}"
+    echo -e "${border}│${NC}    \033[38;5;196m███████╗\033[38;5;208m██████╔╝\033[38;5;226m█████╗  \033[38;5;46m█████╗  \033[38;5;51m██║  ██║\033[0m                 ${border}│${NC}"
+    echo -e "${border}│${NC}    \033[38;5;196m╚════██║\033[38;5;208m██╔═══╝ \033[38;5;226m██╔══╝  \033[38;5;46m██╔══╝  \033[38;5;51m██║  ██║\033[0m                 ${border}│${NC}"
+    echo -e "${border}│${NC}    \033[38;5;196m███████║\033[38;5;208m██║     \033[38;5;226m███████╗\033[38;5;46m███████╗\033[38;5;51m██████╔╝\033[0m                 ${border}│${NC}"
+    echo -e "${border}│${NC}    \033[38;5;196m╚══════╝\033[38;5;208m╚═╝     \033[38;5;226m╚══════╝\033[38;5;46m╚══════╝\033[38;5;51m╚═════╝\033[0m                  ${border}│${NC}"
+    echo -e "${border}│${NC}                                                              ${border}│${NC}"
+    echo -e "${border}│${NC}    ${title}\033[1mSpeed Tunneling - Anti-DPI Manager\033[0m                        ${border}│${NC}"
+    echo -e "${border}│${NC}    ${version}New Version : ${SCRIPT_VERSION}\033[0m                                   ${border}│${NC}"
+    echo -e "${border}│${NC}                                                              ${border}│${NC}"
+    echo -e "${border}│${NC}    ${link1}https://t.me/SpeedwIT\033[0m                                   ${border}│${NC}"
+    echo -e "${border}│${NC}    ${link2}https://t.me/Speedw_IT\033[0m                                  ${border}│${NC}"
+    echo -e "${border}│${NC}    ${link3}https://github.com/SpeedwiT\033[0m                             ${border}│${NC}"
+    echo -e "${border}│${NC}                                                              ${border}│${NC}"
+    echo -e "${border}╰──────────────────────────────────────────────────────────────╯${NC}"
+    echo -e "${NC}"
 }
 
 check_root() {
