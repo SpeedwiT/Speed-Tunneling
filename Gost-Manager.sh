@@ -3,7 +3,7 @@
 # ==============================================================================
 # Project: Speed-Tunneling
 # Description: Advanced encrypted tunnel management with anti-DPI capabilities
-# Version: 1.0.0
+# Version: 2.0.0
 # GitHub: https://github.com/SpeedwiT
 # ==============================================================================
 
@@ -21,7 +21,7 @@ readonly ORANGE='\033[0;33m'
 readonly PURPLE='\033[0;35m'
 readonly NC='\033[0m'
 
-readonly SCRIPT_VERSION="1.3.0"
+readonly SCRIPT_VERSION="2.0.0"
 readonly MANAGER_NAME="gost-manager"
 readonly MANAGER_PATH="/usr/local/bin/$MANAGER_NAME"
 
@@ -76,7 +76,7 @@ show_banner() {
     echo "║   ╚══════╝╚═╝     ╚══════╝╚══════╝╚═════╝                    ║"
     echo "║                                                              ║"
     echo "║           Speed Tunneling - Anti-DPI Manager                 ║"
-    echo "║                      Version ${SCRIPT_VERSION}               ║"
+    echo "║              New Version ${SCRIPT_VERSION}                   ║"
     echo "║                                                              ║"
     echo "║          https://t.me/SpeedwIT                               ║"
     echo "║          https://t.me/Speedw_IT                              ║"
