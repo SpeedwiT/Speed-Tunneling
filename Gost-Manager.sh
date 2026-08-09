@@ -66,34 +66,40 @@ pause() {
 show_banner() {
     clear
     
-    # آرایه رنگ‌های مختلف برای ایجاد انیمیشن تغییر رنگ
-    local color_list=("\033[38;5;196m" "\033[38;5;208m" "\033[38;5;226m" "\033[38;5;46m" "\033[38;5;51m" "\033[38;5;33m" "\033[38;5;201m")
+    # پالت رنگی برای موج متحرک روی بنر
+    local gradient_colors=("\033[38;5;46m" "\033[38;5;51m" "\033[38;5;33m" "\033[38;5;201m" "\033[38;5;226m" "\033[38;5;208m")
     
-    # اجرای یک انیمیشن کوتاه تغییر رنگ (مثلا ۳ دور چرخش)
-    for i in {1..3}; do
-        for c in "${color_list[@]}"; do
-            clear
-            echo -e "${c}"
-            echo "╔══════════════════════════════════════════════════════════════╗"
-            echo "║                                                              ║"
-            echo "║    ███████╗██████╗ ███████╗███████╗██████╗                   ║"
-            echo "║    ██╔════╝██╔══██╗██╔════╝██╔════╝██╔══██╗                  ║"
-            echo "║    ███████╗██████╔╝█████╗  █████╗  ██║  ██║                  ║"
-            echo "║    ╚════██║██╔═══╝ ██╔══╝  ██╔══╝  ██║  ██║                  ║"
-            echo "║    ███████║██║     ███████╗███████╗██████╔╝                  ║"
-            echo "║    ╚══════╝╚═╝     ╚══════╝╚══════╝╚═════╝                   ║"
-            echo "║                                                              ║"
-            echo "║    Speed Tunneling - Anti-DPI Manager                        ║"
-            echo "║    New Version ${SCRIPT_VERSION}                             ║"
-            echo "║                                                              ║"
-            echo "║    https://t.me/SpeedwIT                                     ║"
-            echo "║    https://t.me/Speedw_IT                                    ║"
-            echo "║    https://github.com/SpeedwiT                               ║"
-            echo "║                                                              ║"
-            echo "╚══════════════════════════════════════════════════════════════╝"
-            echo -e "${NC}"
-            sleep 0.1
-        done
+    # متن‌ها و ساختار فریم مدرن با گوشه‌های خاص
+    local border_color="\033[38;5;39m"
+    local text_dim="\033[38;5;245m"
+    local text_bold="\033[1m"
+    
+    # اجرای موج رنگی پویا (تعداد چرخه برای روانی حرکت)
+    for step in {1..8}; do
+        clear
+        # انتخاب رنگ پیش‌فرض برای این فریم از انیمیشن
+        local c="${gradient_colors[$((step % ${#gradient_colors[@]}))]}"
+        local c2="${gradient_colors[$(((step + 2) % ${#gradient_colors[@]}))]}"
+        
+        echo -e "${border_color}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓${NC}"
+        echo -e "${border_color}┃${NC}                                                              ${border_color}┃${NC}"
+        echo -e "${border_color}┃${NC}    ${c}███████╗██████╗ ███████╗███████╗██████╗                  ${border_color}┃${NC}"
+        echo -e "${border_color}┃${NC}    ${c}██╔════╝██╔══██╗██╔════╝██╔════╝██╔══██╗                 ${border_color}┃${NC}"
+        echo -e "${border_color}┃${NC}    ${c}███████╗██████╔╝█████╗  █████╗  ██║  ██║                 ${border_color}┃${NC}"
+        echo -e "${border_color}┃${NC}    ${c}╚════██║██╔═══╝ ██╔══╝  ██╔══╝  ██║  ██║                 ${border_color}┃${NC}"
+        echo -e "${border_color}┃${NC}    ${c}███████║██║     ███████╗███████╗██████╔╝                 ${border_color}┃${NC}"
+        echo -e "${border_color}┃${NC}    ${c}╚══════╝╚═╝     ╚══════╝╚══════╝╚═════╝                  ${border_color}┃${NC}"
+        echo -e "${border_color}┃${NC}                                                              ${border_color}┃${NC}"
+        echo -e "${border_color}┃${NC}    ${text_bold}\033[38;5;251mSpeed Tunneling ${text_dim}-${c2} Anti-DPI Manager            ${border_color}┃${NC}"
+        echo -e "${border_color}┃${NC}    \033[38;5;220mNew Version : ${SCRIPT_VERSION}                             ${border_color}┃${NC}"
+        echo -e "${border_color}┃${NC}                                                              ${border_color}┃${NC}"
+        echo -e "${border_color}┃${NC}    \033[38;5;45m⚡ Telegram : \033[4mhttps://t.me/SpeedwIT\033[0m                  ${border_color}┃${NC}"
+        echo -e "${border_color}┃${NC}    \033[38;5;45m⚡ Support  : \033[4mhttps://t.me/Speedw_IT\033[0m                 ${border_color}┃${NC}"
+        echo -e "${border_color}┃${NC}    \033[38;5;213m⚡ GitHub   : \033[4mhttps://github.com/SpeedwiT\033[0m              ${border_color}┃${NC}"
+        echo -e "${border_color}┃${NC}                                                              ${border_color}┃${NC}"
+        echo -e "${border_color}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛${NC}"
+        echo -e "${NC}"
+        sleep 0.12
     done
 }
 
