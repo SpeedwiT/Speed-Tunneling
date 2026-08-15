@@ -3,8 +3,8 @@
 # ==============================================================================
 # Project: Gost-Manager
 # Description: Advanced encrypted tunnel management with anti-DPI capabilities
-# Version: 1.3.0
-# GitHub: https://github.com/behzadea12/Gost-Tunnel-Manager
+# Version: 1.0.0
+# GitHub: https://github.com/SpeedwiT/Speed-Tunneling
 # ==============================================================================
 
 # ==============================================================================
@@ -21,7 +21,7 @@ readonly ORANGE='\033[0;33m'
 readonly PURPLE='\033[0;35m'
 readonly NC='\033[0m'
 
-readonly SCRIPT_VERSION="1.3.0"
+readonly SCRIPT_VERSION="1.0.0"
 readonly MANAGER_NAME="gost-manager"
 readonly MANAGER_PATH="/usr/local/bin/$MANAGER_NAME"
 
@@ -78,9 +78,9 @@ show_banner() {
     echo "║           Encrypted Tunnel Manager - Anti-DPI                ║"
     echo "║                      Version ${SCRIPT_VERSION}                           ║"
     echo "║                                                              ║"
-    echo "║          https://t.me/behzad_developer                       ║"
-    echo "║          https://t.me/BehzadEa12                             ║"
-    echo "║          https://github.com/behzadea12                       ║"
+    echo "║          https://t.me/Speedw_IT                       ║"
+    echo "║          https://t.me/SpeedwIT                             ║"
+    echo "║          https://github.com/SpeedwiT                      ║"
     echo "║                                                              ║"
     echo "╚══════════════════════════════════════════════════════════════╝"
     echo -e "${NC}"
