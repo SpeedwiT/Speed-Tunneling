@@ -66,29 +66,44 @@ pause() {
 show_banner() {
     clear
 
+    local width=62
+    local border
+    border=$(printf '%*s' "$width" '' | tr ' ' '-')
+
+    print_line() {
+        local text="$1"
+        local len=${#text}
+        local pad_left=$(( (width - len) / 2 ))
+        local pad_right=$(( width - len - pad_left ))
+        printf '|%*s%s%*s|\n' "$pad_left" '' "$text" "$pad_right" ''
+    }
+
+    print_empty() {
+        printf '|%*s|\n' "$width" ''
+    }
+
     echo -e "${MAGENTA}"
 
-    printf '%s\n' '+------------------------------------------------------------+'
-    printf '%s\n' '|                                                            |'
-    printf '%s\n' '|        SSSSS  PPPP   EEEEE  EEEEE  DDDD   III  TTTTT      |'
-    printf '%s\n' '|        SS     PP PP  EE     EE     DD DD   II    T         |'
-    printf '%s\n' '|        SSSSS  PPPP   EEEE   EEEE   DD  D   II    T         |'
-    printf '%s\n' '|           SS  PP     EE     EE     DD DD   II    T         |'
-    printf '%s\n' '|        SSSSS  PP     EEEEE  EEEEE  DDDD   III  TTTTT      |'
-    printf '%s\n' '|                                                            |'
-    printf '%s\n' '|              Encrypted Tunnel Manager - Anti-DPI           |'
-    printf '%s\n' '|                                                            |'
+    printf '+%s+\n' "$border"
+    print_empty
 
-    printf '|'
-    printf '%-60s' "                       Version ${SCRIPT_VERSION}"
-    printf '|\n'
+    print_line "SSSSS  PPPP   EEEEE  EEEEE  DDDD   III  TTTTT"
+    print_line "SS     PP PP  EE     EE     DD DD   I     T  "
+    print_line "SSSSS  PPPP   EEEE   EEEE   DD DD   I     T  "
+    print_line "   SS  PP     EE     EE     DD DD   I     T  "
+    print_line "SSSSS  PP     EEEEE  EEEEE  DDDD   III    T  "
 
-    printf '%s\n' '|                                                            |'
-    printf '%s\n' '|                    https://t.me/Speedw_IT                  |'
-    printf '%s\n' '|                    https://t.me/SpeedwIT                   |'
-    printf '%s\n' '|                    https://github.com/SpeedwiT             |'
-    printf '%s\n' '|                                                            |'
-    printf '%s\n' '+------------------------------------------------------------+'
+    print_empty
+    print_line "Encrypted Tunnel Manager - Anti-DPI"
+    print_empty
+    print_line "Version ${SCRIPT_VERSION}"
+    print_empty
+    print_line "https://t.me/Speedw_IT"
+    print_line "https://t.me/SpeedwIT"
+    print_line "https://github.com/SpeedwiT"
+    print_empty
+
+    printf '+%s+\n' "$border"
 
     echo -e "${NC}"
 }
