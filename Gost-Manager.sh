@@ -65,25 +65,76 @@ pause() {
 
 show_banner() {
     clear
+
+    local WIDTH=62
+    local INNER=$((WIDTH - 2))
+
     echo -e "${MAGENTA}"
 
-    echo "╔══════════════════════════════════════════════════════════════╗"
-    echo "║                                                              ║"
-    echo "║     ███████╗██████╗ ███████╗███████╗██╗████████╗           ║"
-    echo "║     ██╔════╝██╔══██╗██╔════╝██╔════╝██║╚══██╔══╝           ║"
-    echo "║     ███████╗██████╔╝█████╗  █████╗  ██║   ██║              ║"
-    echo "║     ╚════██║██╔═══╝ ██╔══╝  ██╔══╝  ██║   ██║              ║"
-    echo "║     ███████║██║     ███████╗███████╗██║   ██║              ║"
-    echo "║     ╚══════╝╚═╝     ╚══════╝╚══════╝╚═╝   ╚═╝              ║"
-    echo "║                                                              ║"
-    echo "║             Encrypted Tunnel Manager - Anti-DPI              ║"
-    printf "║                         Version %-5s                        ║\n" "${SCRIPT_VERSION}"
-    echo "║                                                              ║"
-    echo "║                    https://t.me/Speedw_IT                   ║"
-    echo "║                    https://t.me/SpeedwIT                    ║"
-    echo "║                    https://github.com/SpeedwiT              ║"
-    echo "║                                                              ║"
-    echo "╚══════════════════════════════════════════════════════════════╝"
+    # Top border
+    printf '╔%*s╗\n' "$INNER" '' | sed 's/ /═/g'
+
+    # Empty line
+    printf '║%-*s║\n' "$INNER" ''
+
+    # SPEEDIT
+    printf '║%*s%s%*s║\n' \
+        $(( (INNER - 55) / 2 )) '' \
+        '███████╗███████╗██████╗ ███████╗███████╗████████╗' \
+        $(( (INNER - 55 + 1) / 2 )) ''
+
+    printf '║%*s%s%*s║\n' \
+        $(( (INNER - 55) / 2 )) '' \
+        '██╔════╝██╔════╝██╔══██╗██╔════╝██╔════╝╚══██╔══╝' \
+        $(( (INNER - 55 + 1) / 2 )) ''
+
+    printf '║%*s%s%*s║\n' \
+        $(( (INNER - 55) / 2 )) '' \
+        '███████╗█████╗  ██████╔╝█████╗  █████╗     ██║   ' \
+        $(( (INNER - 55 + 1) / 2 )) ''
+
+    printf '║%*s%s%*s║\n' \
+        $(( (INNER - 55) / 2 )) '' \
+        '╚════██║██╔══╝  ██╔═══╝ ██╔══╝  ██╔══╝     ██║   ' \
+        $(( (INNER - 55 + 1) / 2 )) ''
+
+    printf '║%*s%s%*s║\n' \
+        $(( (INNER - 55) / 2 )) '' \
+        '███████║███████╗██║     ███████╗███████╗    ██║   ' \
+        $(( (INNER - 55 + 1) / 2 )) ''
+
+    printf '║%*s%s%*s║\n' \
+        $(( (INNER - 55) / 2 )) '' \
+        '╚══════╝╚══════╝╚═╝     ╚══════╝╚══════╝    ╚═╝   ' \
+        $(( (INNER - 55 + 1) / 2 )) ''
+
+    # Empty line
+    printf '║%-*s║\n' "$INNER" ''
+
+    # Description
+    printf '║%*s║\n' "$(( (INNER + 42) / 2 ))" 'Encrypted Tunnel Manager - Anti-DPI'
+
+    # Version
+    local VERSION_TEXT="Version ${SCRIPT_VERSION}"
+    printf '║%*s║\n' "$(( (INNER + ${#VERSION_TEXT}) / 2 ))" "$VERSION_TEXT"
+
+    # Empty line
+    printf '║%-*s║\n' "$INNER" ''
+
+    # Links
+    local LINK1="https://t.me/Speedw_IT"
+    local LINK2="https://t.me/SpeedwIT"
+    local LINK3="https://github.com/SpeedwiT"
+
+    printf '║%*s║\n' "$(( (INNER + ${#LINK1}) / 2 ))" "$LINK1"
+    printf '║%*s║\n' "$(( (INNER + ${#LINK2}) / 2 ))" "$LINK2"
+    printf '║%*s║\n' "$(( (INNER + ${#LINK3}) / 2 ))" "$LINK3"
+
+    # Empty line
+    printf '║%-*s║\n' "$INNER" ''
+
+    # Bottom border
+    printf '╚%*s╝\n' "$INNER" '' | sed 's/ /═/g'
 
     echo -e "${NC}"
 }
