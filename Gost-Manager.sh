@@ -66,6 +66,7 @@ pause() {
 show_banner() {
     clear
     echo -e "${MAGENTA}"
+
     echo "╔══════════════════════════════════════════════════════════════╗"
     echo "║                                                              ║"
     echo "║     ███████╗██████╗ ███████╗███████╗██╗████████╗           ║"
@@ -76,13 +77,14 @@ show_banner() {
     echo "║     ╚══════╝╚═╝     ╚══════╝╚══════╝╚═╝   ╚═╝              ║"
     echo "║                                                              ║"
     echo "║             Encrypted Tunnel Manager - Anti-DPI              ║"
-    echo "║                      Version ${SCRIPT_VERSION}              ║"
+    printf "║                         Version %-5s                        ║\n" "${SCRIPT_VERSION}"
     echo "║                                                              ║"
-    echo "║                   https://t.me/Speedw_IT                     ║"
-    echo "║                   https://t.me/SpeedwIT                      ║"
-    echo "║                   https://github.com/SpeedwiT                ║"
+    echo "║                    https://t.me/Speedw_IT                   ║"
+    echo "║                    https://t.me/SpeedwIT                    ║"
+    echo "║                    https://github.com/SpeedwiT              ║"
     echo "║                                                              ║"
     echo "╚══════════════════════════════════════════════════════════════╝"
+
     echo -e "${NC}"
 }
 
