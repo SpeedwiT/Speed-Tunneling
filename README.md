@@ -44,15 +44,15 @@
 
 ---
 
-## 📥 Quick Installation (One-Click)
+## 📥 Installation
 
-Run on **both servers** (Iran & foreign) as **root**:
+To get the script, please contact us on Telegram:
 
-```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/SpeedwiT/Speed-Tunneling/main/Gost-Manager.sh)
-```
+**[@SpeedwIT](https://t.me/SpeedwIT)** — Support & Download
 
-> After installation, run the command `gost-manager` to open the main menu.
+Or join our channel: [t.me/Speedw_IT](https://t.me/Speedw_IT)
+
+> The script is distributed privately. Contact us to receive it.
 
 ## 🖥️ Usage Guide
 
