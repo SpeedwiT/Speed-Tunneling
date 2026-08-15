@@ -65,12 +65,29 @@ pause() {
 
 show_banner() {
     clear
-
     export LC_ALL=C.UTF-8 2>/dev/null || export LC_ALL=en_US.UTF-8 2>/dev/null
 
     local width=64
     local border
     border=$(printf '═%.0s' $(seq 1 "$width"))
+
+    local art=(
+        "███████╗██████╗ ███████╗███████╗██████╗ ██╗████████╗"
+        "██╔════╝██╔══██╗██╔════╝██╔════╝██╔══██╗██║╚══██╔══╝"
+        "███████╗██████╔╝█████╗  █████╗  ██║  ██║██║   ██║   "
+        "╚════██║██╔═══╝ ██╔══╝  ██╔══╝  ██║  ██║██║   ██║   "
+        "███████║██║     ███████╗███████╗██████╔╝██║   ██║   "
+        "╚══════╝╚═╝     ╚══════╝╚══════╝╚═════╝ ╚═╝   ╚═╝   "
+    )
+    local art_width=${#art[0]}
+    local art_pad_left=$(( (width - art_width) / 2 ))
+    local art_pad_right=$(( width - art_width - art_pad_left ))
+    local rows=${#art[@]}
+
+    # پالت موج نور: از بنفش تیره تا صورتی/سفید روشن و برگشت
+    local wave=(53 89 90 126 127 163 164 200 201 213 219 255 219 213 201 200 164 163 127 126 90 89)
+    local band=${#wave[@]}
+    local base=53
 
     print_line() {
         local text="$1"
@@ -79,22 +96,53 @@ show_banner() {
         local pad_right=$(( width - len - pad_left ))
         printf '║%*s%s%*s║\n' "$pad_left" '' "$text" "$pad_right" ''
     }
+    print_empty() { printf '║%*s║\n' "$width" ''; }
 
-    print_empty() {
-        printf '║%*s║\n' "$width" ''
+    render_frame() {
+        local pos=$1
+        for row in "${art[@]}"; do
+            local line=""
+            local i=0
+            local n=${#row}
+            while (( i < n )); do
+                local ch="${row:$i:1}"
+                local diff=$(( i - pos ))
+                if (( diff >= 0 && diff < band )); then
+                    line+="\033[38;5;${wave[$diff]}m${ch}"
+                else
+                    line+="\033[38;5;${base}m${ch}"
+                fi
+                (( i++ ))
+            done
+            printf '║%*s%b\033[0m%*s║\n' "$art_pad_left" '' "$line" "$art_pad_right" ''
+        done
     }
 
-    echo -e "${MAGENTA}"
-
+    printf '\033[35m'
     printf '╔%s╗\n' "$border"
     print_empty
+    printf '\033[0m'
 
-    print_line "███████╗██████╗ ███████╗███████╗██████╗ ██╗████████╗"
-    print_line "██╔════╝██╔══██╗██╔════╝██╔════╝██╔══██╗██║╚══██╔══╝"
-    print_line "███████╗██████╔╝█████╗  █████╗  ██║  ██║██║   ██║   "
-    print_line "╚════██║██╔═══╝ ██╔══╝  ██╔══╝  ██║  ██║██║   ██║   "
-    print_line "███████║██║     ███████╗███████╗██████╔╝██║   ██║   "
-    print_line "╚══════╝╚═╝     ╚══════╝╚══════╝╚═════╝ ╚═╝   ╚═╝   "
+    local delay=0.018
+    local cycles=2
+
+    for ((c=0; c<cycles; c++)); do
+        for ((pos=-band; pos<=art_width; pos++)); do
+            render_frame "$pos"
+            sleep "$delay"
+            printf '\033[%dA' "$rows"
+        done
+        for ((pos=art_width; pos>=-band; pos--)); do
+            render_frame "$pos"
+            sleep "$delay"
+            printf '\033[%dA' "$rows"
+        done
+    done
+
+    printf '\033[35m'
+    for row in "${art[@]}"; do
+        printf '║%*s%s%*s║\n' "$art_pad_left" '' "$row" "$art_pad_right" ''
+    done
 
     print_empty
     print_line "Encrypted Tunnel Manager - Anti-DPI"
@@ -104,10 +152,8 @@ show_banner() {
     print_line "https://t.me/SpeedwIT"
     print_line "https://github.com/SpeedwiT"
     print_empty
-
     printf '╚%s╝\n' "$border"
-
-    echo -e "${NC}"
+    printf '\033[0m'
 }
 
 check_root() {
