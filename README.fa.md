@@ -132,7 +132,7 @@ bash <(curl -fsSL https://raw.githubusercontent.com/SpeedwiT/Speed-Tunneling/mai
 - در گروه تلگرام یا کانال به اشتراک بذار  
 
 **کانال تلگرام توسعه‌دهنده:** [t.me/Speedw_IT](https://t.me/Speedw_IT)  
-** پشتیبانی:** [t.me/SpeedwIT](https://t.me/SpeedwIT)  
+**پشتیبانی تلگرام:** [t.me/SpeedwIT](https://t.me/SpeedwIT)  
 **گیت‌هاب:** [github.com/SpeedwiT](https://github.com/SpeedwiT)
 
 ---
@@ -144,16 +144,9 @@ bash <(curl -fsSL https://raw.githubusercontent.com/SpeedwiT/Speed-Tunneling/mai
 <summary>💰 ارز دیجیتال / Crypto</summary>
 <br>
 
-**Tron (TRC20):** `TWUcNhGugfjTdMiREsWfDbrZR2yq5WLsyR`
+**Trx (TRC20):** `TWUcNhGugfjTdMiREsWfDbrZR2yq5WLsyR`  
 
-**Tether:**  
-**TRC20**  
-`TWUcNhGugfjTdMiREsWfDbrZR2yq5WLsyR`  
-
-**TRON (TRC20):**  
-`TWUcNhGugfjTdMiREsWfDbrZR2yq5WLsyR`
-
-
+**Usdt (Bep20):** `0xEaE80700A282970C2d7d7993F9F31a2689e37E31`
 ---
 
 ## 📄 لایسنس
@@ -161,9 +154,3 @@ bash <(curl -fsSL https://raw.githubusercontent.com/SpeedwiT/Speed-Tunneling/mai
 این پروژه تحت لایسنس **MIT** منتشر شده است.  
 می‌تونی آزادانه استفاده، تغییر و توزیع کنی (با ذکر منبع).
 
----
-
-## قدردانی
-
-
-- **GOST** – هسته اصلی این ابزار [https://github.com/ginuerzh/gost](https://github.com/ginuerzh/gost)
