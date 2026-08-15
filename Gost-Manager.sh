@@ -21,6 +21,10 @@ readonly ORANGE='\033[0;33m'
 readonly PURPLE='\033[0;35m'
 readonly NC='\033[0m'
 
+# Force UTF-8 for proper Unicode rendering
+export LANG="${LANG:-en_US.UTF-8}"
+export LC_ALL="${LC_ALL:-en_US.UTF-8}"
+
 readonly SCRIPT_VERSION="1.0.0"
 readonly MANAGER_NAME="gost-manager"
 readonly MANAGER_PATH="/usr/local/bin/$MANAGER_NAME"
@@ -65,25 +69,27 @@ pause() {
 
 show_banner() {
     clear
-    echo -e "${MAGENTA}"
+    echo -e "${CYAN}"
     echo "╔══════════════════════════════════════════════════════════════╗"
     echo "║                                                              ║"
-    echo "║      ███████╗██████╗ ███████╗███████╗██████╗                  ║"
-    echo "║      ██╔════╝██╔══██╗██╔════╝██╔════╝██╔══██╗                 ║"
-    echo "║      ███████╗██████╔╝█████╗  █████╗  ██║  ██║                 ║"
-    echo "║      ╚════██║██╔═══╝ ██╔══╝  ██╔══╝  ██║  ██║                 ║"
-    echo "║      ███████║██║     ███████╗███████╗██████╔╝                 ║"
-    echo "║      ╚══════╝╚═╝     ╚══════╝╚══════╝╚═════╝                  ║"
+    echo "║   ███████╗██████╗ ███████╗███████╗██████╗ ██╗               ║"
+    echo "║   ██╔════╝██╔══██╗██╔════╝██╔════╝██╔══██╗██║               ║"
+    echo "║   ███████╗██████╔╝█████╗  █████╗  ██║  ██║██║               ║"
+    echo "║   ╚════██║██╔═══╝ ██╔══╝  ██╔══╝  ██║  ██║██║               ║"
+    echo "║   ███████║██║     ███████╗███████╗██████╔╝██║               ║"
+    echo "║   ╚══════╝╚═╝     ╚══════╝╚══════╝╚═════╝ ╚═╝               ║"
     echo "║                                                              ║"
-    echo "║           ⚡ Speed Tunneling - Anti-DPI Manager               ║"
-    echo "║                      Version ${SCRIPT_VERSION}                           ║"
-    echo "║                                                              ║"
-    echo "║          https://t.me/SpeedwIT  (Support)                    ║"
-    echo "║          https://t.me/Speedw_IT (Channel)                    ║"
-    echo "║          https://github.com/SpeedwiT                         ║"
+    echo "║        ████████╗██╗   ██╗███╗   ██╗███╗   ██╗███████╗██╗     ║"
+    echo "║        ╚══██╔══╝██║   ██║████╗  ██║████╗  ██║██╔════╝██║     ║"
+    echo "║           ██║   ██║   ██║██╔██╗ ██║██╔██╗ ██║█████╗  ██║     ║"
+    echo "║           ██║   ██║   ██║██║╚██╗██║██║╚██╗██║██╔══╝  ██║     ║"
+    echo "║           ██║   ╚██████╔╝██║ ╚████║██║ ╚████║███████╗███████╗║"
+    echo "║           ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚═╝  ╚═══╝╚══════╝╚══════╝║"
     echo "║                                                              ║"
     echo "╚══════════════════════════════════════════════════════════════╝"
     echo -e "${NC}"
+    echo -e "  ${YELLOW}⚡ Speed Tunneling${NC}  ${WHITE}v${SCRIPT_VERSION}${NC}  ${CYAN}|${NC}  ${GREEN}@SpeedwIT${NC}  ${CYAN}|${NC}  ${GREEN}@Speedw_IT${NC}"
+    echo ""
 }
 
 check_root() {
@@ -1058,14 +1064,16 @@ EOF
 manage_tunnels() {
     while true; do
         show_banner
-        echo -e "${BLUE}════════════════════════════════════════════${NC}"
-        echo -e "${WHITE}            TUNNEL MANAGEMENT               ${NC}"
-        echo -e "${BLUE}════════════════════════════════════════════${NC}\n"
+        echo -e "${CYAN}┌──────────────────────────────────────────────────────────────┐${NC}"
+        echo -e "${CYAN}│${NC}                   ${YELLOW}TUNNEL MANAGEMENT${NC}                         ${CYAN}│${NC}"
+        echo -e "${CYAN}└──────────────────────────────────────────────────────────────┘${NC}"
+        echo ""
         
         local services=($(systemctl list-units --type=service --all --no-pager --plain 2>/dev/null | grep "gost-" | awk '{print $1}'))
         
         if [ ${#services[@]} -eq 0 ]; then
-            echo -e "${YELLOW}No tunnels configured${NC}\n"
+            echo -e "${YELLOW}  No tunnels configured${NC}"
+            echo ""
             pause
             return
         fi
@@ -1075,23 +1083,24 @@ manage_tunnels() {
         
         for svc in "${services[@]}"; do
             local status=$(systemctl is-active "$svc" 2>/dev/null)
-            local status_color
+            local status_icon
             
             if [[ "$status" == "active" ]]; then
-                status_color="${GREEN}●${NC}"
+                status_icon="${GREEN}●${NC}"
             elif [[ "$status" == "failed" ]]; then
-                status_color="${RED}✗${NC}"
+                status_icon="${RED}✗${NC}"
             else
-                status_color="${YELLOW}○${NC}"
+                status_icon="${YELLOW}○${NC}"
             fi
             
-            echo -e "${WHITE}[$count]${NC} $status_color $svc"
+            echo -e "  ${WHITE}[${count}]${NC} ${status_icon} ${svc}${NC}"
             service_map[$count]="$svc"
             ((count++))
         done
         
-        echo -e "\n${WHITE}[0]${NC} Back to Main Menu"
-        
+        echo ""
+        echo -e "  ${WHITE}[0]${NC} ${CYAN}Back to Main Menu${NC}"
+        echo ""
         prompt_input "Select tunnel:"
         read -p "" choice </dev/tty
         echo ""
@@ -1117,9 +1126,10 @@ manage_single_tunnel() {
 
     while true; do
         show_banner
-        echo -e "${BLUE}════════════════════════════════════════════${NC}"
-        echo -e "${WHITE}TUNNEL: $service${NC}"
-        echo -e "${BLUE}════════════════════════════════════════════${NC}\n"
+        echo -e "${CYAN}┌──────────────────────────────────────────────────────────────┐${NC}"
+        echo -e "${CYAN}│${NC}  ${WHITE}TUNNEL:${NC} ${YELLOW}${service}${NC}"
+        echo -e "${CYAN}└──────────────────────────────────────────────────────────────┘${NC}"
+        echo ""
         
         # Get service status
         local status=$(systemctl is-active "$service" 2>/dev/null)
@@ -1127,24 +1137,32 @@ manage_single_tunnel() {
         local pid=$(systemctl show -p MainPID "$service" 2>/dev/null | cut -d= -f2)
         local memory=$(systemctl show -p MemoryCurrent "$service" 2>/dev/null | cut -d= -f2)
         
-        echo -e "${WHITE}Status:${NC} $(if [[ "$status" == "active" ]]; then echo "${GREEN}● Active${NC}"; elif [[ "$status" == "failed" ]]; then echo "${RED}✗ Failed${NC}"; else echo "${YELLOW}○ Inactive${NC}"; fi)"
-        echo -e "${WHITE}Enabled:${NC} $(if [[ "$enabled" == "enabled" ]]; then echo "${GREEN}Yes${NC}"; else echo "${RED}No${NC}"; fi)"
-        [ "$pid" != "0" ] && echo -e "${WHITE}PID:${NC} $pid"
+        echo -e "  ${WHITE}Status:${NC} $(if [[ "$status" == "active" ]]; then echo "${GREEN}● Active${NC}"; elif [[ "$status" == "failed" ]]; then echo "${RED}✗ Failed${NC}"; else echo "${YELLOW}○ Inactive${NC}"; fi)"
+        echo -e "  ${WHITE}Enabled:${NC} $(if [[ "$enabled" == "enabled" ]]; then echo "${GREEN}Yes${NC}"; else echo "${RED}No${NC}"; fi)"
+        [ "$pid" != "0" ] && echo -e "  ${WHITE}PID:${NC} $pid"
         if [[ -n "$memory" && "$memory" != "0" && "$memory" != "[not set]" ]]; then
-            echo -e "${WHITE}Memory:${NC} $((memory/1024)) KB"
+            echo -e "  ${WHITE}Memory:${NC} $((memory/1024)) KB"
         fi
-
-        echo -e "\n${CYAN}Actions:${NC}"
-        echo -e "${WHITE}[1]${NC} Start Tunnel"
-        echo -e "${WHITE}[2]${NC} Stop Tunnel"
-        echo -e "${WHITE}[3]${NC} Restart Tunnel"
-        echo -e "${WHITE}[4]${NC} View Live Logs"
-        echo -e "${WHITE}[5]${NC} View Last 50 Log Lines"
-        echo -e "${WHITE}[6]${NC} Edit Service File"
-        echo -e "${WHITE}[7]${NC} Show Full Config"
-        echo -e "${WHITE}[8]${NC} Enable/Disable Autostart"
-        echo -e "${WHITE}[9]${NC} Remove Tunnel"
-        echo -e "${WHITE}[0]${NC} Back to Tunnel List"
+        
+        echo ""
+        echo -e "${WHITE}  ┌──────────────────────────────────────────────────────────┐${NC}"
+        echo -e "${WHITE}  │${GREEN}                      ACTIONS                            ${WHITE}│${NC}"
+        echo -e "${WHITE}  ├──────────────────────────────────────────────────────────┤${NC}"
+        echo -e "${WHITE}  │${NC}                                                          ${WHITE}│${NC}"
+        echo -e "${WHITE}  │${NC}   ${GREEN}[1]${NC} Start Tunnel${NC}                                        ${WHITE}│${NC}"
+        echo -e "${WHITE}  │${NC}   ${RED}[2]${NC} Stop Tunnel${NC}                                         ${WHITE}│${NC}"
+        echo -e "${WHITE}  │${NC}   ${YELLOW}[3]${NC} Restart Tunnel${NC}                                      ${WHITE}│${NC}"
+        echo -e "${WHITE}  │${NC}   ${BLUE}[4]${NC} View Live Logs${NC}                                     ${WHITE}│${NC}"
+        echo -e "${WHITE}  │${NC}   ${BLUE}[5]${NC} View Last 50 Log Lines${NC}                            ${WHITE}│${NC}"
+        echo -e "${WHITE}  │${NC}   ${MAGENTA}[6]${NC} Edit Service File${NC}                                  ${WHITE}│${NC}"
+        echo -e "${WHITE}  │${NC}   ${CYAN}[7]${NC} Show Full Config${NC}                                   ${WHITE}│${NC}"
+        echo -e "${WHITE}  │${NC}   ${ORANGE}[8]${NC} Enable/Disable Autostart${NC}                          ${WHITE}│${NC}"
+        echo -e "${WHITE}  │${NC}   ${RED}[9]${NC} Remove Tunnel${NC}                                      ${WHITE}│${NC}"
+        echo -e "${WHITE}  │${NC}                                                          ${WHITE}│${NC}"
+        echo -e "${WHITE}  │${NC}   ${WHITE}[0]${NC} Back to Tunnel List${NC}                               ${WHITE}│${NC}"
+        echo -e "${WHITE}  │${NC}                                                          ${WHITE}│${NC}"
+        echo -e "${WHITE}  └──────────────────────────────────────────────────────────┘${NC}"
+        echo ""
         prompt_input "Select action:"
         read -p "" action </dev/tty
         echo ""
@@ -1239,14 +1257,16 @@ manage_single_tunnel() {
 view_logs_menu() {
     while true; do
         show_banner
-        echo -e "${BLUE}════════════════════════════════════════════${NC}"
-        echo -e "${WHITE}               LOGS VIEWER                  ${NC}"
-        echo -e "${BLUE}════════════════════════════════════════════${NC}\n"
+        echo -e "${CYAN}┌──────────────────────────────────────────────────────────────┐${NC}"
+        echo -e "${CYAN}│${NC}                     ${YELLOW}LOGS VIEWER${NC}                            ${CYAN}│${NC}"
+        echo -e "${CYAN}└──────────────────────────────────────────────────────────────┘${NC}"
+        echo ""
         
         local services=($(systemctl list-units --type=service --all --no-pager --plain 2>/dev/null | grep "gost-" | awk '{print $1}'))
         
         if [ ${#services[@]} -eq 0 ]; then
-            echo -e "${YELLOW}No tunnels found${NC}\n"
+            echo -e "${YELLOW}  No tunnels found${NC}"
+            echo ""
             pause
             return
         fi
@@ -1255,12 +1275,14 @@ view_logs_menu() {
         declare -A log_map
         
         for svc in "${services[@]}"; do
-            echo -e "${WHITE}[$count]${NC} $svc"
+            echo -e "  ${WHITE}[${count}]${NC} ${svc}${NC}"
             log_map[$count]="$svc"
             ((count++))
         done
         
-        echo -e "\n  ${WHITE}[0]${NC} Back to Main Menu"
+        echo ""
+        echo -e "  ${WHITE}[0]${NC} ${CYAN}Back to Main Menu${NC}"
+        echo ""
         
         prompt_input "Select tunnel for logs:"
         read -p "" choice </dev/tty
@@ -1271,11 +1293,13 @@ view_logs_menu() {
             [0-9]*)
                 if [[ "$choice" =~ ^[0-9]+$ ]] && [ -n "${log_map[$choice]}" ]; then
                     local svc="${log_map[$choice]}"
-                    echo -e "\n${CYAN}Log options for $svc:${NC}"
-                    echo -e "${WHITE}[1]${NC} Live logs (follow)"
-                    echo -e "${WHITE}[2]${NC} Last 100 lines"
-                    echo -e "${WHITE}[3]${NC} Last 50 lines with errors"
-                    echo -e "${WHITE}[0]${NC} Back"
+                    echo ""
+                    echo -e "  ${CYAN}Log options for ${WHITE}${svc}:${NC}${NC}"
+                    echo -e "  ${GREEN}[1]${NC} Live logs (follow)"
+                    echo -e "  ${BLUE}[2]${NC} Last 100 lines"
+                    echo -e "  ${YELLOW}[3]${NC} Last 50 lines with errors"
+                    echo -e "  ${WHITE}[0]${NC} Back"
+                    echo ""
                     
                     prompt_input "Select:"
                     read -p "" log_opt </dev/tty
@@ -1304,71 +1328,86 @@ view_logs_menu() {
 
 show_system_info() {
     show_banner
-    echo -e "${BLUE}════════════════════════════════════════════${NC}"
-    echo -e "${WHITE}            SYSTEM INFORMATION              ${NC}"
-    echo -e "${BLUE}════════════════════════════════════════════${NC}\n"
+    echo -e "${CYAN}┌──────────────────────────────────────────────────────────────┐${NC}"
+    echo -e "${CYAN}│${NC}                   ${YELLOW}SYSTEM INFORMATION${NC}                       ${CYAN}│${NC}"
+    echo -e "${CYAN}└──────────────────────────────────────────────────────────────┘${NC}"
+    echo ""
     
     local os=$(detect_os)
     local arch=$(detect_arch)
     local public_ip=$(get_public_ip)
     local hostname=$(hostname)
-    local uptime=$(uptime -p | sed 's/up //')
+    local uptime_info=$(uptime -p | sed 's/up //')
     local cpu_load=$(uptime | awk -F'load average:' '{print $2}')
     local mem_total=$(free -h | awk '/^Mem:/ {print $2}')
     local mem_used=$(free -h | awk '/^Mem:/ {print $3}')
     local disk_used=$(df -h / | awk 'NR==2 {print $3}')
     local disk_total=$(df -h / | awk 'NR==2 {print $2}')
     
-    echo -e "${WHITE}Hostname:${NC}    $hostname"
-    echo -e "${WHITE}Public IP:${NC}   $public_ip"
-    echo -e "${WHITE}OS:${NC}          $os"
-    echo -e "${WHITE}Architecture:${NC} $arch"
-    echo -e "${WHITE}Uptime:${NC}      $uptime"
-    echo -e "${WHITE}Load Avg:${NC}    $cpu_load"
-    echo -e "${WHITE}Memory:${NC}      $mem_used / $mem_total"
-    echo -e "${WHITE}Disk:${NC}        $disk_used / $disk_total"
+    echo -e "  ${CYAN}┌────────────────────────────────────────────────────────────┐${NC}"
+    echo -e "  ${CYAN}│${NC} ${WHITE}Hostname:${NC}    ${hostname}${NC}"
+    echo -e "  ${CYAN}│${NC} ${WHITE}Public IP:${NC}   ${public_ip}${NC}"
+    echo -e "  ${CYAN}│${NC} ${WHITE}OS:${NC}          ${os}${NC}"
+    echo -e "  ${CYAN}│${NC} ${WHITE}Architecture:${NC} ${arch}${NC}"
+    echo -e "  ${CYAN}│${NC} ${WHITE}Uptime:${NC}      ${uptime_info}${NC}"
+    echo -e "  ${CYAN}│${NC} ${WHITE}Load Avg:${NC}    ${cpu_load}${NC}"
+    echo -e "  ${CYAN}│${NC} ${WHITE}Memory:${NC}      ${mem_used} / ${mem_total}${NC}"
+    echo -e "  ${CYAN}│${NC} ${WHITE}Disk:${NC}        ${disk_used} / ${disk_total}${NC}"
     
     if [[ -x "$BIN_PATH" ]]; then
         local gost_version=$("$BIN_PATH" -V 2>&1 | head -1)
-        echo -e "${WHITE}GOST Version:${NC} $gost_version"
+        echo -e "  ${CYAN}│${NC} ${WHITE}GOST Version:${NC} ${gost_version}${NC}"
     fi
     
-    echo -e "\n${CYAN}Tunnel Statistics:${NC}"
+    echo -e "  ${CYAN}└────────────────────────────────────────────────────────────┘${NC}"
+    echo ""
+    echo -e "  ${YELLOW}Tunnel Statistics:${NC}"
     local total=$(systemctl list-units --type=service --all --no-pager --plain 2>/dev/null | grep -c "gost-")
     local active=$(systemctl list-units --type=service --state=running --no-pager --plain 2>/dev/null | grep -c "gost-")
     
-    echo -e "${WHITE}Total Tunnels:${NC}  $total"
-    echo -e "${WHITE}Active Tunnels:${NC} $active"
+    echo -e "  ${WHITE}Total Tunnels:${NC}  ${total}${NC}"
+    echo -e "  ${WHITE}Active Tunnels:${NC} ${active}${NC}"
+    echo ""
     
     pause
 }
 
 # ==============================================================================
-# 13. MAIN MENU
+# 13. MAIN MENU (Redesigned)
 # ==============================================================================
 
 main_menu() {
     while true; do
         show_banner
-        echo -e "\033[38;5;51m╭──────────────────────────────────────────────────────────────╮\033[0m"
-        echo -e "\033[38;5;51m│\033[0m                                                              \033[38;5;51m│\033[0m"
-        echo -e "\033[38;5;51m│\033[0m   \033[38;5;226m⚡\033[0m  \033[38;5;196m██\033[38;5;208m██\033[38;5;226m██\033[38;5;46m██\033[38;5;51m██\033[38;5;196m██\033[0m  \033[38;5;208m██\033[38;5;226m██\033[38;5;46m██\033[38;5;51m██\033[38;5;196m██\033[0m  \033[38;5;226m██\033[38;5;46m██\033[38;5;51m██\033[38;5;196m██\033[0m   \033[38;5;51m│\033[0m"
-        echo -e "\033[38;5;51m│\033[0m                                                              \033[38;5;51m│\033[0m"
-        echo -e "\033[38;5;51m│\033[0m   \033[1m\033[38;5;226mMAIN MENU\033[0m                                                  \033[38;5;51m│\033[0m"
-        echo -e "\033[38;5;51m│\033[0m                                                              \033[38;5;51m│\033[0m"
-        echo -e "\033[38;5;51m├──────────────────────────────────────────────────────────────┤\033[0m"
-        echo -e "\033[38;5;51m│\033[0m                                                              \033[38;5;51m│\033[0m"
-        echo -e "\033[38;5;51m│\033[0m  \033[38;5;46m[1]\033[0m  \033[0m\033[38;5;250m🔗 Configure Client Tunnel  (Iran)\033[0m                         \033[38;5;51m│\033[0m"
-        echo -e "\033[38;5;51m│\033[0m  \033[38;5;46m[2]\033[0m  \033[0m\033[38;5;250m🌐 Configure Server Tunnel  (Kharej)\033[0m                       \033[38;5;51m│\033[0m"
-        echo -e "\033[38;5;51m│\033[0m  \033[38;5;46m[3]\033[0m  \033[0m\033[38;5;250m⚙️  Manage Tunnels           (Start/Stop/Edit)\033[0m            \033[38;5;51m│\033[0m"
-        echo -e "\033[38;5;51m│\033[0m  \033[38;5;46m[4]\033[0m  \033[0m\033[38;5;250m📋 View Logs                (Live/Historical)\033[0m             \033[38;5;51m│\033[0m"
-        echo -e "\033[38;5;51m│\033[0m  \033[38;5;46m[5]\033[0m  \033[0m\033[38;5;250m📊 System Information\033[0m                                     \033[38;5;51m│\033[0m"
-        echo -e "\033[38;5;51m│\033[0m                                                              \033[38;5;51m│\033[0m"
-        echo -e "\033[38;5;51m│\033[0m  \033[38;5;196m[0]\033[0m  \033[0m\033[38;5;250m🚪 Exit\033[0m                                                    \033[38;5;51m│\033[0m"
-        echo -e "\033[38;5;51m│\033[0m                                                              \033[38;5;51m│\033[0m"
-        echo -e "\033[38;5;51m╰──────────────────────────────────────────────────────────────╯\033[0m"
+        
+        echo -e "${CYAN}┌──────────────────────────────────────────────────────────────┐${NC}"
+        echo -e "${CYAN}│${NC}                                                              ${CYAN}│${NC}"
+        echo -e "${CYAN}│${NC}   ${YELLOW}██  ██ ██  ██ ██████ ███   ██ ██  ██ ██  ██ █████  ██████${NC}   ${CYAN}│${NC}"
+        echo -e "${CYAN}│${NC}   ${YELLOW}██  ██ ██  ██ ██     ████  ██ ██  ██ ██  ██ ██  ██ ██     ${NC}   ${CYAN}│${NC}"
+        echo -e "${CYAN}│${NC}   ${YELLOW}██████  ████  ████   ██ ██ ██  ████  ██████ █████  ██████${NC}   ${CYAN}│${NC}"
+        echo -e "${CYAN}│${NC}   ${YELLOW}██  ██   ██   ██     ██  ████  ██     ██  ██ ██  ██ ██     ${NC}   ${CYAN}│${NC}"
+        echo -e "${CYAN}│${NC}   ${YELLOW}██  ██   ██   ██████ ██   ███  ██     ██  ██ █████  ██████${NC}   ${CYAN}│${NC}"
+        echo -e "${CYAN}│${NC}                                                              ${CYAN}│${NC}"
+        echo -e "${CYAN}│${NC}                ${GREEN}⚡ Speed Tunneling Manager ⚡${NC}                   ${CYAN}│${NC}"
+        echo -e "${CYAN}│${NC}                      ${WHITE}v${SCRIPT_VERSION}${NC}                                ${CYAN}│${NC}"
+        echo -e "${CYAN}│${NC}                                                              ${CYAN}│${NC}"
+        echo -e "${CYAN}└──────────────────────────────────────────────────────────────┘${NC}"
         echo ""
-        echo -e "\033[38;5;208m💡 Speed Tunneling v${SCRIPT_VERSION} | @SpeedwIT\033[0m"
+        echo -e "${WHITE}  ┌──────────────────────────────────────────────────────────┐${NC}"
+        echo -e "${WHITE}  │${GREEN}                    MAIN MENU                              ${WHITE}│${NC}"
+        echo -e "${WHITE}  ├──────────────────────────────────────────────────────────┤${NC}"
+        echo -e "${WHITE}  │${NC}                                                          ${WHITE}│${NC}"
+        echo -e "${WHITE}  │${NC}   ${GREEN}[1]${NC} 🔗 Configure Client Tunnel  (Iran)${NC}                    ${WHITE}│${NC}"
+        echo -e "${WHITE}  │${NC}   ${GREEN}[2]${NC} 🌐 Configure Server Tunnel  (Kharej)${NC}                  ${WHITE}│${NC}"
+        echo -e "${WHITE}  │${NC}   ${YELLOW}[3]${NC} ⚙️  Manage Tunnels           (Start/Stop/Edit)${NC}        ${WHITE}│${NC}"
+        echo -e "${WHITE}  │${NC}   ${BLUE}[4]${NC} 📋 View Logs                (Live/Historical)${NC}          ${WHITE}│${NC}"
+        echo -e "${WHITE}  │${NC}   ${MAGENTA}[5]${NC} 📊 System Information${NC}                                  ${WHITE}│${NC}"
+        echo -e "${WHITE}  │${NC}                                                          ${WHITE}│${NC}"
+        echo -e "${WHITE}  │${NC}   ${RED}[0]${NC} 🚪 Exit${NC}                                                  ${WHITE}│${NC}"
+        echo -e "${WHITE}  │${NC}                                                          ${WHITE}│${NC}"
+        echo -e "${WHITE}  └──────────────────────────────────────────────────────────┘${NC}"
+        echo ""
+        echo -e "${CYAN}  💡 @SpeedwIT | @Speedw_IT${NC}"
         echo ""
         prompt_input "Select option:"
         read -p "" choice </dev/tty
