@@ -147,6 +147,7 @@ bash <(curl -fsSL https://raw.githubusercontent.com/SpeedwiT/Speed-Tunneling/mai
 **Trx (TRC20):** `TWUcNhGugfjTdMiREsWfDbrZR2yq5WLsyR`  
 
 **Usdt (Bep20):** `0xEaE80700A282970C2d7d7993F9F31a2689e37E31`
+
 ---
 
 ## 📄 لایسنس
