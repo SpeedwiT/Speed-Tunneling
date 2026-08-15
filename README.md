@@ -3,7 +3,7 @@
 > Special focus on bypassing DPI, high stability in unstable networks, and support for diverse and combined protocols (Shadowsocks, KCP, obfs4, QUIC, gRPC, WebSocket and more than 30 ready-made combinations).
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Version-2.0.0-blue?style=for-the-badge&logo=linux" alt="Version">
+  <img src="https://img.shields.io/badge/Version-1.0.0-blue?style=for-the-badge&logo=linux" alt="Version">
   <img src="https://img.shields.io/badge/Platform-Linux-orange?style=for-the-badge" alt="Platform">
   <img src="https://img.shields.io/github/stars/SpeedwiT/Speed-Tunneling?style=for-the-badge&color=yellow" alt="Stars">
   <img src="https://img.shields.io/github/forks/SpeedwiT/Speed-Tunneling?style=for-the-badge&color=green" alt="Forks">
@@ -44,15 +44,20 @@
 
 ---
 
-## 📥 Installation
+## 📥 Installation (One-Click)
 
-To get the script, please contact us on Telegram:
+Run on **both servers** (Iran & foreign) as **root**:
 
-**[@SpeedwIT](https://t.me/SpeedwIT)** — Support & Download
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/SpeedwiT/Speed-Tunneling/main/Gost-Manager.sh)
+```
 
-Or join our channel: [t.me/Speedw_IT](https://t.me/Speedw_IT)
+> After installation, run the command `gost-manager` to open the main menu.
 
-> The script is distributed privately. Contact us to receive it.
+**Requirements:**
+- Linux (Ubuntu/Debian/CentOS)
+- root access
+- curl installed
 
 ## 🖥️ Usage Guide
 
@@ -135,9 +140,11 @@ If you're using **Speed Tunneling** and would like to support the development of
 <summary>💰 Cryptocurrency</summary>
 <br>
 
-**Trx (TRC20):** `TWUcNhGugfjTdMiREsWfDbrZR2yq5WLsyR`  
+**Tron (TRC20):** `TWUcNhGugfjTdMiREsWfDbrZR2yq5WLsyR`  
 
-**Usdt (Bep20):** `0xEaE80700A282970C2d7d7993F9F31a2689e37E31`  
+**Tether (TRC20):** `TWUcNhGugfjTdMiREsWfDbrZR2yq5WLsyR`  
+
+**TRON (TRC20):** `TWUcNhGugfjTdMiREsWfDbrZR2yq5WLsyR`  
 
 
 > Any contribution, big or small, helps keep the project alive and motivates further development. 🙏

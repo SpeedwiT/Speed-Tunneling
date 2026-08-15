@@ -45,15 +45,20 @@
 
 ---
 
-## 📥 نصب
+## 📥 نصب سریع (One-Click)
 
-برای دریافت اسکریپت لطفاً با ما در تلگرام تماس بگیرید:
+روی **هر دو سرور** (ایران و خارج) به عنوان **root** اجرا کنید:
 
-**[@SpeedwIT](https://t.me/SpeedwIT)** — پشتیبانی و دریافت اسکریپت
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/SpeedwiT/Speed-Tunneling/main/Gost-Manager.sh)
+```
 
-یا به کانال ما بپیوندید: [t.me/Speedw_IT](https://t.me/Speedw_IT)
+> بعد از نصب، دستور `gost-manager` را بزنید تا منوی اصلی باز شود.
 
-> این اسکریپت به صورت خصوصی توزیع می‌شود. برای دریافت با ما تماس بگیرید.
+**نیازمندی‌ها:**
+- لینوکس (Ubuntu/Debian/CentOS)
+- دسترسی root
+- curl نصب شده
 
 
 ## 🖥️ راهنمای استفاده
