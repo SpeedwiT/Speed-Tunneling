@@ -145,5 +145,6 @@ If you're using **Speed Tunneling** and would like to support the development of
 ---
 
 ## 📄 License
-This project is released under the **MIT** license.  
-You are free to use, modify and distribute it (with attribution).
+This project is released under a **custom restrictive license** (All Rights Reserved).  
+You may NOT redistribute, modify, or use commercially without explicit written permission from SpeedwiT.  
+See [LICENSE](LICENSE) for details.
