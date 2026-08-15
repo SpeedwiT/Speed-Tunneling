@@ -149,14 +149,10 @@ If you're using **Speed Tunneling** and would like to support the development of
 <summary>💰 Cryptocurrency</summary>
 <br>
 
-**Tron (TRC20):** `TWUcNhGugfjTdMiREsWfDbrZR2yq5WLsyR`  
+**Trx (TRC20):** `TWUcNhGugfjTdMiREsWfDbrZR2yq5WLsyR`  
 
-**Tether**  
-**TRC20**  
-`TWUcNhGugfjTdMiREsWfDbrZR2yq5WLsyR`  
+**Usdt (Bep20):** `0xEaE80700A282970C2d7d7993F9F31a2689e37E31`  
 
-**TRON (TRC20):**  
-`TWUcNhGugfjTdMiREsWfDbrZR2yq5WLsyR`
 
 > Any contribution, big or small, helps keep the project alive and motivates further development. 🙏
 
@@ -165,8 +161,3 @@ If you're using **Speed Tunneling** and would like to support the development of
 ## 📄 License
 This project is released under the **MIT** license.  
 You are free to use, modify and distribute it (with attribution).
-
----
-
-## Acknowledgments
-- **GOST** – Core engine of this tool [https://github.com/ginuerzh/gost](https://github.com/ginuerzh/gost)
