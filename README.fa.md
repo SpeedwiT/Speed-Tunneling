@@ -101,25 +101,11 @@ bash <(curl -fsSL https://raw.githubusercontent.com/SpeedwiT/Speed-Tunneling/mai
 
 ---
 
-## 📸 اسکرین‌شات‌ها
+## 📸 اسکرین‌شات
 
-<details>
-<summary>منوی اصلی (Main Menu)</summary>
-<br>
-<img src="images/Main_Menu.png" width="800" alt="Main Menu">
-</details>
-
-<details>
-<summary>مدیریت سرویس‌ها (Manage Tunnels / Service Management)</summary>
-<br>
-<img src="images/Manage_Service.png" width="800" alt="Manage Service">
-</details>
-
-<details>
-<summary>لاگ زنده (Live Logs)</summary>
-<br>
-<img src="images/Live_Logs.png" width="800" alt="Live Logs">
-</details>
+<p align="center">
+  <img src="speedshot.jpg" width="800" alt="Speed Tunneling Screenshot">
+</p>
 
 ---
 
