@@ -3,7 +3,7 @@
 > با تمرکز ویژه بر عبور از DPI، پایداری بالا در شبکه‌های ناپایدار و پشتیبانی از پروتکل‌های متنوع و ترکیبی (Shadowsocks، KCP، obfs4، QUIC، gRPC، TLS، WebSocket و بیش از 30 ترکیب آماده).
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Version-2.0.0-blue?style=for-the-badge&logo=linux" alt="Version">
+  <img src="https://img.shields.io/badge/Version-1.0.0-blue?style=for-the-badge&logo=linux" alt="Version">
   <img src="https://img.shields.io/badge/Platform-Linux-orange?style=for-the-badge" alt="Platform">
   <img src="https://img.shields.io/github/stars/SpeedwiT/Speed-Tunneling?style=for-the-badge&color=yellow" alt="Stars">
   <img src="https://img.shields.io/github/forks/SpeedwiT/Speed-Tunneling?style=for-the-badge&color=green" alt="Forks">

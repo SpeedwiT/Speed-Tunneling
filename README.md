@@ -140,11 +140,9 @@ If you're using **Speed Tunneling** and would like to support the development of
 <summary>💰 Cryptocurrency</summary>
 <br>
 
-**Tron (TRC20):** `TWUcNhGugfjTdMiREsWfDbrZR2yq5WLsyR`  
+**Trx (TRC20):** `TWUcNhGugfjTdMiREsWfDbrZR2yq5WLsyR`  
 
-**Tether (TRC20):** `TWUcNhGugfjTdMiREsWfDbrZR2yq5WLsyR`  
-
-**TRON (TRC20):** `TWUcNhGugfjTdMiREsWfDbrZR2yq5WLsyR`  
+**Usdt (Bep20):** `0xEaE80700A282970C2d7d7993F9F31a2689e37E31`  
 
 
 > Any contribution, big or small, helps keep the project alive and motivates further development. 🙏
